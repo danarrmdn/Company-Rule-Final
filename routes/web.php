@@ -18,7 +18,7 @@ Route::get('rules-file/{id}', [App\Http\Controllers\CompanyRuleController::class
 
 Route::post('/company-rules/upload', [CompanyRuleController::class, 'uploadTempFile'])->name('company-rules.upload');
 
-Route::get('/dashboard', [CompanyRuleController::class, 'index'])
+Route::get('/dashboard', [CompanyRuleController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile/avatar/delete', [ProfileController::class, 'destroyAvatar'])->name('profile.avatar.destroy');
+
+    Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
 
     Route::get('/company-rules', [CompanyRuleController::class, 'index'])->name('company-rules.index');
     Route::get('/company-rules/create', [CompanyRuleController::class, 'create'])->name('company-rules.create');

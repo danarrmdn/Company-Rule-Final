@@ -7,7 +7,7 @@
             $approversDisabled = !in_array($rule->status, ['Draft', 'Send Back']);
         @endphp
         <div class="flex justify-between items-center">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 class="font-semibold text-xl text-white leading-tight">
                     {{ __('Edit Company Document') }}
                 </h2>
                 <div>

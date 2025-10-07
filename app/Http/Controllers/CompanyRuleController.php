@@ -17,6 +17,7 @@ class CompanyRuleController extends Controller
     {
         $search = $request->input('search');
         $status = $request->input('status');
+        $myDocuments = $request->input('my_documents');
 
         $rulesQuery = CompanyRule::query()
             ->when($search, function ($query, $searchTerm) {
@@ -39,12 +40,35 @@ class CompanyRuleController extends Controller
             $rulesQuery->where('status', 'Draft')->where('is_obsolete', false);
         }
 
+        if ($myDocuments) {
+            $rulesQuery->where('creator_id', Auth::id());
+        }
+
         $rules = $rulesQuery->orderBy('is_obsolete', 'asc')
             ->orderBy('created_at', 'desc')
             ->paginate(10)
             ->appends($request->query());
 
         return view('company-rules.index', compact('rules'));
+    }
+
+    public function dashboard()
+    {
+        $user = Auth::user();
+        $totalDocuments = CompanyRule::count();
+        $pendingDocuments = CompanyRule::where('status', 'like', 'Pending%')->count();
+        $approvedDocuments = CompanyRule::where('status', 'Approved')->where('is_obsolete', false)->count();
+        $obsoleteDocuments = CompanyRule::where('is_obsolete', true)->count();
+        $rejectedDocuments = CompanyRule::where('status', 'Rejected')->count();
+
+        return view('dashboard', compact(
+            'user',
+            'totalDocuments',
+            'pendingDocuments',
+            'approvedDocuments',
+            'obsoleteDocuments',
+            'rejectedDocuments'
+        ));
     }
 
     public function create()

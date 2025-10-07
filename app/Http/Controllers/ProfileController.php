@@ -45,9 +45,17 @@ class ProfileController extends Controller
             \Illuminate\Support\Facades\Log::info($user->avatar);
         }
 
-        $user->save();
-
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Display the user's profile settings form.
+     */
+    public function settings(Request $request): View
+    {
+        return view('profile.settings', [
+            'user' => $request->user(),
+        ]);
     }
 
     /**

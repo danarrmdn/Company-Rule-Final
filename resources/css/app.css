@@ -5,9 +5,12 @@
 @tailwind utilities;
 
 body {
-    background: linear-gradient(120deg, #0061f2 0%, #0061f2 40%, #00c6ff 100%);
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
+}
+
+.login-page {
+    background: linear-gradient(120deg, #0061f2 0%, #0061f2 40%, #00c6ff 100%);
 }
 
 .card {

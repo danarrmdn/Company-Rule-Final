@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ __('Company Document List') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-white leading-tight">
+                {{ __('Company Document List') }}
+            </h2>
+            <div>
+                <button onclick="window.history.back()" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50">Back</button>
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-12">

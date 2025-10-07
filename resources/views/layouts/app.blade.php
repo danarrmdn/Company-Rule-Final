@@ -16,13 +16,14 @@
 
         <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/plexus.js'])
         
         @stack('styles')
         
         <script src="//unpkg.com/alpinejs" defer></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased login-page">
+    <canvas id="plexus-bg" style="position: fixed; top: 0; left: 0; z-index: -1;"></canvas>
         <div class="min-h-screen">
             @include('layouts.navigation')
 

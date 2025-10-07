@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-white leading-tight">
                 {{ __('Profile') }}
             </h2>
 
@@ -39,21 +39,38 @@
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+                    <h2 class="text-lg font-medium text-gray-900">Profile Details</h2>
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-1">
+                            <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&color=7F9CF5&background=EBF4FF' }}" alt="Profile Photo" class="h-32 w-32 rounded-full object-cover">
+                        </div>
+                        <div class="md:col-span-2 space-y-4">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Name</p>
+                                <p class="mt-1 text-lg text-gray-900">{{ $user->name }}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Email Address</p>
+                                <p class="mt-1 text-lg text-gray-900">{{ $user->email }}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Employee ID</p>
+                                <p class="mt-1 text-lg text-gray-900">{{ $user->emp_id }}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Department</p>
+                                <p class="mt-1 text-lg text-gray-900">{{ $user->department }}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Grade</p>
+                                <p class="mt-1 text-lg text-gray-900">{{ $user->grade }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
         </div>
     </div>
 </x-app-layout>
