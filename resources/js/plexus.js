@@ -4,7 +4,7 @@ class Plexus {
         this.ctx = canvas.getContext('2d');
         this.particles = [];
         this.particleCount = 100;
-        this.maxDistance = 100;
+        this.maxDistance = 150;
 
         this.resize();
         window.addEventListener('resize', () => this.resize());
@@ -25,7 +25,7 @@ class Plexus {
                 y: Math.random() * this.canvas.height,
                 vx: (Math.random() - 0.5) * 0.5,
                 vy: (Math.random() - 0.5) * 0.5,
-                radius: 2
+                radius: 3
             });
         }
     }

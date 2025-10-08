@@ -23,7 +23,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 md:p-8 text-gray-900">
-                    <h3 class="text-lg font-medium">Editing: <span class="text-emerald-600">{{ $rule->document_name }}</span></h3>
+                    <h3 class="text-lg font-medium">Editing: <span class="text-indigo-600">{{ $rule->document_name }}</span></h3>
                     <p class="text-sm text-gray-500 border-b border-gray-200 pb-4 mb-4">Update the document details below. The form is reset for clarity.</p>
 
                     @if ($errors->any())
@@ -47,7 +47,7 @@
                                 <div class="md:col-span-3 flex items-center space-x-4">
                                     @foreach(range(1, 5) as $i)
                                     <label class="flex items-center space-x-2">
-                                        <input type="radio" name="no_of_controller" value="{{ $i }}" class="rounded-full border-gray-300 text-emerald-600 shadow-sm focus:ring-emerald-500" {{ old('no_of_controller', count(array_filter([$rule->controller_1_id, $rule->controller_2_id, $rule->controller_3_id, $rule->controller_4_id, $rule->controller_5_id]))) == $i ? 'checked' : '' }} {{ $controllersDisabled ? 'disabled' : '' }}>
+                                        <input type="radio" name="no_of_controller" value="{{ $i }}" class="rounded-full border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ old('no_of_controller', count(array_filter([$rule->controller_1_id, $rule->controller_2_id, $rule->controller_3_id, $rule->controller_4_id, $rule->controller_5_id]))) == $i ? 'checked' : '' }} {{ $controllersDisabled ? 'disabled' : '' }}>
                                         <span>{{ $i }}</span>
                                     </label>
                                     @endforeach
@@ -100,7 +100,7 @@
                                 <div class="p-4 grid grid-cols-4 gap-4 items-start">
                                     <x-input-label for="reason_of_revision" class="font-semibold text-sm text-gray-600" :value="__('Reason of Revision *')" />
                                     <div class="col-span-3">
-                                        <textarea id="reason_of_revision" name="reason_of_revision" rows="3" class="block w-full border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 rounded-md shadow-sm">{{ old('reason_of_revision', $rule->reason_of_revision) }}</textarea>
+                                        <textarea id="reason_of_revision" name="reason_of_revision" rows="3" class="block w-full border-gray-300 focus:border-indigo-600 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('reason_of_revision', $rule->reason_of_revision) }}</textarea>
                                     </div>
                                 </div>
                                 <div class="p-4 grid grid-cols-4 gap-4 items-center">
@@ -123,7 +123,7 @@
                                         <div class="md:col-span-3 flex items-center space-x-4">
                                             @foreach(range(1, 3) as $i)
                                             <label class="flex items-center space-x-2">
-                                                <input type="radio" name="no_of_approver" value="{{ $i }}" class="rounded-full border-gray-300 text-emerald-600 shadow-sm focus:ring-emerald-500" {{ old('no_of_approver', count(array_filter([$rule->approver_1_id, $rule->approver_2_id, $rule->approver_3_id]))) == $i ? 'checked' : '' }} {{ $approversDisabled ? 'disabled' : '' }}>
+                                                <input type="radio" name="no_of_approver" value="{{ $i }}" class="rounded-full border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" {{ old('no_of_approver', count(array_filter([$rule->approver_1_id, $rule->approver_2_id, $rule->approver_3_id]))) == $i ? 'checked' : '' }} {{ $approversDisabled ? 'disabled' : '' }}>
                                                 <span>{{ $i }}</span>
                                             </label>
                                             @endforeach

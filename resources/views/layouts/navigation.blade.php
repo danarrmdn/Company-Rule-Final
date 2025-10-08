@@ -7,12 +7,12 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="text-white font-bold text-xl">
+                    <a href="{{ route('dashboard') }}" class="font-bold text-xl">
                         <img src="{{ asset('images/LogoNSI.png') }}" alt="NSI Logo" class="block h-10 w-auto">
                     </a>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex sm:items-center">
                     <x-nav-link :href="route('company-rules.index')" :active="request()->routeIs('company-rules.index', 'company-rules.show', 'company-rules.edit')">
                         {{ __('Document List') }}
                     </x-nav-link>
@@ -29,7 +29,7 @@
                             <span class="relative">
                                 {{ __('Approve Document') }}
                                 @if ($pendingCount > 0)
-                                    <span class="absolute top-[-0.75rem] right-[-1.5rem] inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-blue-600 bg-white rounded-full">
+                                    <span class="absolute top-[-0.75rem] right-[-1.5rem] inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
                                         {{ $pendingCount }}
                                     </span>
                                 @endif
@@ -44,13 +44,13 @@
                 <div class="ms-3 relative">
                     <x-dropdown align="right" width="96">
                         <x-slot name="trigger">
-                            <button class="relative inline-flex items-center p-2 text-sm font-medium text-center text-white hover:text-white/80 focus:outline-none">
+                            <button class="relative inline-flex items-center p-2 text-sm font-medium text-center text-gray-800 hover:text-gray-900 focus:outline-none">
                                 <svg class="w-7 h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M10 2a6 6 0 0 0-6 6v3.586l-.707.707A1 1 0 0 0 4 14h12a1 1 0 0 0 .707-1.707L16 11.586V8a6 6 0 0 0-6-6Zm0 14a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
                                 </svg>
                                 <span class="sr-only">Notifications</span>
                                 @if($unreadNotificationsCount > 0)
-                                    <div class="absolute -top-2 -end-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-blue-600 bg-white rounded-full shadow-lg">{{ $unreadNotificationsCount }}</div>
+                                    <div class="absolute -top-2 -end-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full shadow-lg">{{ $unreadNotificationsCount }}</div>
                                 @endif
                             </button>
                         </x-slot>
@@ -102,7 +102,7 @@
                 <div class="ms-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white focus:outline-none transition ease-in-out duration-150">
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-800 focus:outline-none transition ease-in-out duration-150">
                                 @if (Auth::user()->avatar)
                                     <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar" class="h-8 w-8 rounded-full me-2 object-cover">
                                 @else
@@ -130,12 +130,16 @@
                                 {{ __('Account Settings') }}
                             </x-dropdown-link>
 
+                            <div class="border-t border-gray-100"></div>
+
+                            <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                                    this.closest('form').submit();"
+                                        class="hover:bg-red-50">
+                                    <span class="text-red-600 font-medium">{{ __('Log Out') }}</span>
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -144,7 +148,7 @@
             </div>
 
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:text-gray-900 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -172,7 +176,7 @@
                     <span class="relative">
                         {{ __('Approve Document') }}
                         @if ($pendingCount > 0)
-                            <span class="absolute top-[-0.25rem] right-[-1.5rem] inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-blue-600 bg-white rounded-full">
+                            <span class="absolute top-[-0.25rem] right-[-1.5rem] inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
                                 {{ $pendingCount }}
                             </span>
                         @endif
@@ -197,6 +201,8 @@
                     {{ __('Account Settings') }}
                 </x-responsive-nav-link>
 
+                <div class="border-t border-gray-200"></div>
+
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -204,7 +210,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        <span class="text-red-600 font-medium">{{ __('Log Out') }}</span>
                     </x-responsive-nav-link>
                 </form>
             </div>

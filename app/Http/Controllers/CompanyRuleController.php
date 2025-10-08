@@ -21,8 +21,10 @@ class CompanyRuleController extends Controller
 
         $rulesQuery = CompanyRule::query()
             ->when($search, function ($query, $searchTerm) {
-                $query->where('document_name', 'like', "%{$searchTerm}%")
-                    ->orWhere('number', 'like', "%{$searchTerm}%");
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('document_name', 'like', "%{$searchTerm}%")
+                        ->orWhere('number', 'like', "%{$searchTerm}%");
+                });
             });
 
         if ($status === 'approved') {
@@ -34,6 +36,12 @@ class CompanyRuleController extends Controller
                 $query->where('status', 'like', 'Pending%')
                     ->orWhere('status', 'Send Back');
             })->where('is_obsolete', false);
+        } elseif ($status === 'in_process') {
+            $rulesQuery->where(function ($query) {
+                $query->where('status', 'like', 'Pending%')
+                    ->orWhere('status', 'Send Back')
+                    ->orWhere('status', 'Draft');
+            })->where('is_obsolete', false);
         } elseif ($status === 'rejected') {
             $rulesQuery->where('status', 'Rejected')->where('is_obsolete', false);
         } elseif ($status === 'draft') {
@@ -41,7 +49,7 @@ class CompanyRuleController extends Controller
         }
 
         if ($myDocuments) {
-            $rulesQuery->where('creator_id', Auth::id());
+            $rulesQuery->where('creator_id', Auth::user()->id);
         }
 
         $rules = $rulesQuery->orderBy('is_obsolete', 'asc')
@@ -56,7 +64,11 @@ class CompanyRuleController extends Controller
     {
         $user = Auth::user();
         $totalDocuments = CompanyRule::count();
-        $pendingDocuments = CompanyRule::where('status', 'like', 'Pending%')->count();
+        $pendingDocuments = CompanyRule::where(function ($query) {
+            $query->where('status', 'like', 'Pending%')
+                ->orWhere('status', 'Send Back')
+                ->orWhere('status', 'Draft');
+        })->count();
         $approvedDocuments = CompanyRule::where('status', 'Approved')->where('is_obsolete', false)->count();
         $obsoleteDocuments = CompanyRule::where('is_obsolete', true)->count();
         $rejectedDocuments = CompanyRule::where('status', 'Rejected')->count();

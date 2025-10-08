@@ -22,11 +22,10 @@
                         'all': 'All',
                         'approved': 'Approved',
                         'obsolete': 'Obsolete',
-                        'pending_send_back': 'Pending/Send Back',
-                        'rejected': 'Rejected',
-                        'draft': 'Draft'
+                        'in_process': 'In Process',
+                        'rejected': 'Rejected'
                     },
-                    currentFilter: '{{ request('status', 'all') }}',
+                    currentFilter: '{{ request('status', 'all') }}'.replace('pending_send_back', 'in_process').replace('draft', 'in_process'),
                     handleAuthClick(event, permission, message, redirectUrl = '', deleteModal = '') {
                         if (permission) {
                             if (redirectUrl) {
@@ -86,14 +85,11 @@
                                 <x-dropdown-link :href="route('company-rules.index', ['status' => 'obsolete'])">
                                     Obsolete
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('company-rules.index', ['status' => 'pending_send_back'])">
-                                    Pending/Send Back
+                                <x-dropdown-link :href="route('company-rules.index', ['status' => 'in_process'])">
+                                    In Process
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('company-rules.index', ['status' => 'rejected'])">
                                     Rejected
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('company-rules.index', ['status' => 'draft'])">
-                                    Draft
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>

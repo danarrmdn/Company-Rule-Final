@@ -20,8 +20,8 @@ class CompanyRulePolicy
      */
     public function view(User $user, CompanyRule $companyRule): bool
     {
-        // If the document is approved, any logged-in user can view it.
-        if ($companyRule->status === 'Approved') {
+        // If the document is approved or rejected, any logged-in user can view it.
+        if (in_array($companyRule->status, ['Approved', 'Rejected'])) {
             return true;
         }
 

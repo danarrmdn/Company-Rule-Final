@@ -21,9 +21,9 @@
                         <p class="text-3xl font-bold text-blue-600">{{ $totalDocuments }}</p>
                     </div>
                 </a>
-                <a href="{{ route('company-rules.index', ['status' => 'pending_send_back']) }}" class="block bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-xl transition-shadow duration-300">
+                <a href="{{ route('company-rules.index', ['status' => 'in_process']) }}" class="block bg-white overflow-hidden shadow-sm sm:rounded-lg hover:shadow-xl transition-shadow duration-300">
                     <div class="p-6">
-                        <h4 class="text-lg font-semibold text-gray-800">Pending Approvals</h4>
+                        <h4 class="text-lg font-semibold text-gray-800">In Process</h4>
                         <p class="text-3xl font-bold text-yellow-500">{{ $pendingDocuments }}</p>
                     </div>
                 </a>

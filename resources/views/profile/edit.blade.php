@@ -12,7 +12,7 @@
     </x-slot>
     
 
-    <div class="py-12">
+    <div class="py-12" x-data>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             @if (session('status') === 'profile-updated')
@@ -42,7 +42,13 @@
                     <h2 class="text-lg font-medium text-gray-900">Profile Details</h2>
                     <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="md:col-span-1">
-                            <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&color=7F9CF5&background=EBF4FF' }}" alt="Profile Photo" class="h-32 w-32 rounded-full object-cover">
+                            @if($user->avatar)
+                                <button @click="$dispatch('open-modal', 'full-profile-photo')">
+                                    <img src="{{ asset('storage/' . $user->avatar) }}" alt="Profile Photo" class="h-32 w-32 rounded-full object-cover cursor-pointer hover:opacity-80 transition">
+                                </button>
+                            @else
+                                <img src="{{ 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&color=7F9CF5&background=EBF4FF' }}" alt="Profile Photo" class="h-32 w-32 rounded-full object-cover">
+                            @endif
                         </div>
                         <div class="md:col-span-2 space-y-4">
                             <div>
@@ -73,4 +79,14 @@
 
         </div>
     </div>
+
+    {{-- Modal for Full Size Profile Photo --}}
+    <x-modal name="full-profile-photo" maxWidth="4xl">
+        <div class="p-1 bg-gray-800">
+            @if($user->avatar)
+            <img src="{{ asset('storage/' . $user->avatar) }}" alt="Profile Photo" class="w-full h-full object-contain max-h-[90vh]">
+            @endif
+        </div>
+    </x-modal>
+
 </x-app-layout>
